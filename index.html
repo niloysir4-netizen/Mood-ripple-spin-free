@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Ripple Spin</title>
+<style>
+body {
+  text-align: center;
+  background: #00ff00; /* Green screen for live */
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+.wheel-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 30px;
+}
+
+#wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 8px solid black;
+  transition: transform 4s ease-out;
+}
+
+#middlePic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 18px;
+  background: black;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#result {
+  font-size: 22px;
+  margin-top: 20px;
+  color: black;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<h2>🔥 MOOD RIPPLE SPIN 🔥</h2>
+
+<div class="wheel-container">
+  <!-- Wheel image -->
+  <img id="wheel" src="https://i.imgur.com/wheel-image.png">
+
+  <!-- Middle picture -->
+  <img id="middlePic" src="https://i.imgur.com/middle-default.png">
+</div>
+
+<br>
+<button onclick="spin()">SPIN NOW</button>
+
+<div id="result"></div>
+
+<script>
+let rewards = [
+  {img: "https://i.imgur.com/pic1.png", label: "100 Diamonds 💎"},
+  {img: "https://i.imgur.com/pic2.png", label: "50 Diamonds 💎"},
+  {img: "https://i.imgur.com/pic3.png", label: "25 Diamonds 💎"},
+  {img: "https://i.imgur.com/pic4.png", label: "Custom Room 🎮"}
+];
+
+function spin() {
+  let wheel = document.getElementById("wheel");
+  let middlePic = document.getElementById("middlePic");
+  let resultBox = document.getElementById("result");
+
+  let randomIndex = Math.floor(Math.random() * rewards.length);
+  let selected = rewards[randomIndex];
+
+  let randomDeg = 3600 + (randomIndex * (360 / rewards.length));
+  wheel.style.transform = "rotate(" + randomDeg + "deg)";
+
+  setTimeout(() => {
+    middlePic.src = selected.img;
+    resultBox.innerHTML = "Result: " + selected.label;
+  }, 4000);
+}
+</script>
+
+</body>
+</html>
